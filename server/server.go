@@ -6,18 +6,20 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/nathan-osman/toolset.sh/manager"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
 
 // Server provides the web interface.
 type Server struct {
-	server http.Server
-	logger zerolog.Logger
+	server  http.Server
+	logger  zerolog.Logger
+	manager *manager.Manager
 }
 
 // New create a new Server instance.
-func New(addr string) *Server {
+func New(addr string, m *manager.Manager) *Server {
 	var (
 		r = gin.New()
 		s = &Server{
@@ -25,7 +27,8 @@ func New(addr string) *Server {
 				Addr:    addr,
 				Handler: r,
 			},
-			logger: log.With().Str("package", "server").Logger(),
+			logger:  log.With().Str("package", "server").Logger(),
+			manager: m,
 		}
 	)
 
