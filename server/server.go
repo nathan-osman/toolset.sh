@@ -32,6 +32,9 @@ func New(addr string, m *manager.Manager) *Server {
 		}
 	)
 
+	// Add the index page
+	r.GET("/", s.index)
+
 	// Listen for connections in a separate goroutine
 	go func() {
 		defer s.logger.Info().Msg("server stopped")
