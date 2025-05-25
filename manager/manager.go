@@ -39,7 +39,7 @@ func (m *Manager) Register(t Tool) {
 func (m *Manager) Run(name string) (Output, error) {
 	t, ok := m.tools[name]
 	if !ok {
-		return nil, fmt.Errorf("\"%s\" is not a recognized tool")
+		return nil, fmt.Errorf("\"%s\" is not a recognized tool", name)
 	}
 	return t.Run()
 }
