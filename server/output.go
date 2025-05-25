@@ -40,6 +40,7 @@ func (s *Server) sendOutput(c *gin.Context, r manager.Output) {
 		c.Header("Content-Type", "text/plain; charset=utf-8")
 		c.Writer.WriteHeader(http.StatusOK)
 		c.Writer.Write([]byte(r.Text()))
+		c.Writer.Write([]byte("\n"))
 	}
 }
 
