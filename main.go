@@ -29,8 +29,8 @@ func main() {
 
 			// Create the manager and register all of the tools
 			m := manager.New()
-			m.Register(&uuid.Uuid{})
-			m.Register(&rand.Rand{})
+			m.Register(uuid.New())
+			m.Register(rand.New())
 
 			// Create the server
 			s := server.New(c.String("server-addr"), m)

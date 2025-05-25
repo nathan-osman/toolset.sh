@@ -4,6 +4,7 @@ go 1.23.0
 
 require (
 	github.com/gin-gonic/gin v1.10.1
+	github.com/gofrs/uuid/v5 v5.3.2
 	github.com/rs/zerolog v1.34.0
 	github.com/urfave/cli/v2 v2.27.6
 )
