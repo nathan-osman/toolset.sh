@@ -1,16 +1,19 @@
 package server
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
 
+type indexOutput struct{}
+
+func (i *indexOutput) Text() string {
+	return "Coming soon!"
+}
+
+func (i *indexOutput) Html() string {
+	return `<div class="text-2xl">Coming soon!</div>`
+}
+
 func (s *Server) index(c *gin.Context) {
-
-	// TODO: show helpful intro
-
-	c.Header("Content-Type", "text/plain; charset=utf-8")
-	c.Writer.WriteHeader(http.StatusOK)
-	c.Writer.Write([]byte("Coming soon!\n"))
+	s.sendOutput(c, &indexOutput{})
 }
