@@ -5,9 +5,9 @@ WORKDIR /usr/src/app
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 COPY . .
-RUN go build -v -o /usr/local/bin/daylight.sh
+RUN go build -v -o /usr/local/bin/toolset.sh
 
 # Create the final container with only the binary
 FROM scratch
-COPY --from=0 /usr/local/bin/daylight.sh /usr/local/bin/
-ENTRYPOINT ["daylight.sh"]
+COPY --from=0 /usr/local/bin/toolset.sh /usr/local/bin/
+ENTRYPOINT ["toolset.sh"]
