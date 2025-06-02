@@ -17,8 +17,6 @@ func (s *Server) tool(c *gin.Context) {
 		return
 	}
 
-	// TODO: parameters
-
 	// The final statement in this function body executes the tool - it may
 	// panic, so handle the actual output in the defer below
 
@@ -41,5 +39,5 @@ func (s *Server) tool(c *gin.Context) {
 		}
 	}()
 
-	o = t.Run(&manager.Input{})
+	o = t.Run(convertContextToInput(c, t))
 }
