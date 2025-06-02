@@ -45,17 +45,19 @@ func (s *Server) sendOutput(c *gin.Context, r manager.Output) {
 }
 
 type outputError struct {
-	msg string
+	Error string `json:"error"`
 }
 
 func (o *outputError) Text() string {
-	return o.msg
+	return o.Error
 }
 
 func (o *outputError) Html() string {
 	return o.Text()
 }
 
+// TODO: status code for errors
+
 func (s *Server) sendError(c *gin.Context, msg string) {
-	s.sendOutput(c, &outputError{msg: msg})
+	s.sendOutput(c, &outputError{Error: msg})
 }
