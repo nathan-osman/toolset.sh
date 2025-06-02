@@ -3,6 +3,40 @@ package uuid
 import (
 	"github.com/gofrs/uuid/v5"
 	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/util"
+)
+
+const (
+	paramType = "type"
+
+	typeUuid4 = "uuid4"
+	typeUuid7 = "uuid7"
+)
+
+var (
+	t    = util.MustCreateTemplate(`<div class="font-mono text-lg">{{.}}</div>`)
+	meta = &manager.Meta{
+		Name: "Generate UUID",
+		Desc: "generate a UUID (universally unique identifier)",
+		Params: []*manager.Param{
+			{
+				Name:    paramType,
+				Desc:    "type of UUID",
+				Default: typeUuid4,
+				Options: []*manager.Option{
+					{
+						Name:  typeUuid4,
+						Label: "UUID version 4",
+					},
+					{
+						Name:  typeUuid7,
+						Label: "UUID version 7",
+					},
+				},
+			},
+		},
+		RouteNames: []string{"uuid", "uuid4"},
+	}
 )
 
 type Response struct {
@@ -14,7 +48,7 @@ func (r *Response) Text() string {
 }
 
 func (r *Response) Html() string {
-	return r.Text()
+	return util.MustRenderTemplateToString(t, r.Text())
 }
 
 type Uuid struct{}
@@ -23,24 +57,28 @@ func New() *Uuid {
 	return &Uuid{}
 }
 
-func (u *Uuid) Name() string {
-	return "UUID v4"
+func (u *Uuid) Meta() *manager.Meta {
+	return meta
 }
 
-func (u *Uuid) Desc() string {
-	return "generate a v4 UUID"
-}
-
-func (u *Uuid) RouteNames() []string {
-	return []string{"uuid", "uuid4"}
-}
-
-func (u *Uuid) Run() (manager.Output, error) {
-	v, err := uuid.NewV4()
+func (u *Uuid) Run(i *manager.Input) manager.Output {
+	var (
+		v   uuid.UUID
+		err error
+		t   = util.GetStringParam(i.Params, paramType, typeUuid4)
+	)
+	switch t {
+	case typeUuid4:
+		v, err = uuid.NewV4()
+	case typeUuid7:
+		v, err = uuid.NewV7()
+	default:
+		panic("invalid value for parameter 'type'")
+	}
 	if err != nil {
-		return nil, err
+		panic(err)
 	}
 	return &Response{
 		Value: v.String(),
-	}, nil
+	}
 }

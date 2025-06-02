@@ -1,10 +1,38 @@
 package rand
 
 import (
+	"crypto/rand"
+	"encoding/binary"
 	"fmt"
-	"math/rand/v2"
 
 	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/util"
+)
+
+const (
+	paramMin = "min"
+	paramMax = "max"
+)
+
+var (
+	t    = util.MustCreateTemplate(`<div class="text-2xl">{{.}}</div>`)
+	meta = &manager.Meta{
+		Name: "Random number",
+		Desc: "generate a random number",
+		Params: []*manager.Param{
+			{
+				Name:    paramMin,
+				Desc:    "minimum value, as a floating point number",
+				Default: "0",
+			},
+			{
+				Name:    paramMax,
+				Desc:    "maximum value, as a floating point number",
+				Default: "1",
+			},
+		},
+		RouteNames: []string{"rand", "random"},
+	}
 )
 
 type Response struct {
@@ -16,35 +44,31 @@ func (r *Response) Text() string {
 }
 
 func (r *Response) Html() string {
-	return r.Text()
+	return util.MustRenderTemplateToString(t, r.Text())
 }
 
-type Rand struct {
-	rand *rand.Rand
-}
+type Rand struct{}
 
 func New() *Rand {
-	return &Rand{
-		rand: rand.New(
-			rand.NewPCG(1, 2),
-		),
-	}
+	return &Rand{}
 }
 
-func (r *Rand) Name() string {
-	return "Random Number"
+func (r *Rand) Meta() *manager.Meta {
+	return meta
 }
 
-func (r *Rand) Desc() string {
-	return "generate a random number"
-}
-
-func (r *Rand) RouteNames() []string {
-	return []string{"rand", "random"}
-}
-
-func (r *Rand) Run() (manager.Output, error) {
+func (r *Rand) Run(i *manager.Input) manager.Output {
+	var (
+		b   = make([]byte, 8)
+		min = util.GetFloatParam(i.Params, paramMin, 0.0)
+		max = util.GetFloatParam(i.Params, paramMax, 1.0)
+	)
+	rand.Read(b)
+	var (
+		randInt   = binary.BigEndian.Uint64(b)
+		randFloat = float64(randInt) / (1 << 64)
+	)
 	return &Response{
-		Value: r.rand.Float64(),
-	}, nil
+		Value: min + randFloat*(max-min),
+	}
 }

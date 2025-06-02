@@ -45,17 +45,17 @@ func (s *Server) sendOutput(c *gin.Context, r manager.Output) {
 }
 
 type outputError struct {
-	err error
+	msg string
 }
 
 func (o *outputError) Text() string {
-	return o.err.Error()
+	return o.msg
 }
 
 func (o *outputError) Html() string {
 	return o.Text()
 }
 
-func (s *Server) sendError(c *gin.Context, err error) {
-	s.sendOutput(c, &outputError{err: err})
+func (s *Server) sendError(c *gin.Context, msg string) {
+	s.sendOutput(c, &outputError{msg: msg})
 }
