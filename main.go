@@ -10,6 +10,7 @@ import (
 	"github.com/nathan-osman/toolset.sh/server"
 	"github.com/nathan-osman/toolset.sh/tools/ip"
 	"github.com/nathan-osman/toolset.sh/tools/rand"
+	"github.com/nathan-osman/toolset.sh/tools/time"
 	"github.com/nathan-osman/toolset.sh/tools/uuid"
 	"github.com/urfave/cli/v2"
 )
@@ -32,6 +33,7 @@ func main() {
 			m := manager.New()
 			m.Register(ip.New())
 			m.Register(rand.New())
+			m.Register(time.New())
 			m.Register(uuid.New())
 
 			// Create the server
