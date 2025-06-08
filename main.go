@@ -37,7 +37,10 @@ func main() {
 			m.Register(uuid.New())
 
 			// Create the server
-			s := server.New(c.String("server-addr"), m)
+			s, err := server.New(c.String("server-addr"), m)
+			if err != nil {
+				return err
+			}
 			defer s.Close()
 
 			// Wait for SIGINT or SIGTERM

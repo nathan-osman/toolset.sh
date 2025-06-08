@@ -2,13 +2,20 @@ package server
 
 import (
 	"context"
+	"embed"
 	"errors"
 	"net/http"
 
+	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/nathan-osman/toolset.sh/manager"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+)
+
+var (
+	//go:embed static
+	staticFS embed.FS
 )
 
 // Server provides the web interface.
@@ -19,7 +26,7 @@ type Server struct {
 }
 
 // New create a new Server instance.
-func New(addr string, m *manager.Manager) *Server {
+func New(addr string, m *manager.Manager) (*Server, error) {
 	var (
 		r = gin.New()
 		s = &Server{
@@ -38,6 +45,13 @@ func New(addr string, m *manager.Manager) *Server {
 	// Page for running tools
 	r.GET("/:name", s.tool)
 
+	// Static files
+	f, err := static.EmbedFolder(staticFS, "static")
+	if err != nil {
+		return nil, err
+	}
+	r.Use(static.Serve("/static", f))
+
 	// Listen for connections in a separate goroutine
 	go func() {
 		defer s.logger.Info().Msg("server stopped")
@@ -47,7 +61,7 @@ func New(addr string, m *manager.Manager) *Server {
 		}
 	}()
 
-	return s
+	return s, nil
 }
 
 // Close shuts down the server.
