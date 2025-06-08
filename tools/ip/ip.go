@@ -1,8 +1,6 @@
 package ip
 
 import (
-	"net"
-
 	"github.com/nathan-osman/toolset.sh/manager"
 	"github.com/nathan-osman/toolset.sh/util"
 )
@@ -40,11 +38,7 @@ func (i *IP) Meta() *manager.Meta {
 }
 
 func (i *IP) Run(inp *manager.Input) manager.Output {
-	h, _, err := net.SplitHostPort(inp.C.ClientIP())
-	if err != nil {
-		panic(err)
-	}
 	return &Response{
-		Value: h,
+		Value: inp.C.ClientIP(),
 	}
 }
