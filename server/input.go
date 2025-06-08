@@ -16,6 +16,7 @@ func convertContextToInput(c *gin.Context, t manager.Tool) *manager.Input {
 		// TODO: verify against Options
 	}
 	return &manager.Input{
+		C:      c,
 		Params: params,
 	}
 }

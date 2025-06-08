@@ -1,6 +1,10 @@
 package manager
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/gin-gonic/gin"
+)
 
 // Option represents a valid value for a parameter.
 type Option struct {
@@ -26,6 +30,7 @@ type Meta struct {
 
 // Input represents data available to the tool.
 type Input struct {
+	C      *gin.Context
 	Params map[string]string
 }
 

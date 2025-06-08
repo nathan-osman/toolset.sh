@@ -8,6 +8,7 @@ import (
 
 	"github.com/nathan-osman/toolset.sh/manager"
 	"github.com/nathan-osman/toolset.sh/server"
+	"github.com/nathan-osman/toolset.sh/tools/ip"
 	"github.com/nathan-osman/toolset.sh/tools/rand"
 	"github.com/nathan-osman/toolset.sh/tools/uuid"
 	"github.com/urfave/cli/v2"
@@ -29,8 +30,9 @@ func main() {
 
 			// Create the manager and register all of the tools
 			m := manager.New()
-			m.Register(uuid.New())
+			m.Register(ip.New())
 			m.Register(rand.New())
+			m.Register(uuid.New())
 
 			// Create the server
 			s := server.New(c.String("server-addr"), m)
