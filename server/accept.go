@@ -5,18 +5,18 @@ import (
 	"strings"
 )
 
-func parseAcceptHeader(v string) outputType {
+func parseAcceptHeader(v string) (outputFormat, error) {
 	for _, m := range strings.Split(v, ",") {
 		mediaType, _, err := mime.ParseMediaType(m)
 		if err != nil {
-			panic(err)
+			return 0, err
 		}
 		switch {
 		case mediaType == "application/json":
-			return outputJson
+			return outputJson, nil
 		case mediaType == "text/plain":
-			return outputText
+			return outputText, nil
 		}
 	}
-	return outputHtml
+	return outputHtml, nil
 }

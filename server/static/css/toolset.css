@@ -6,7 +6,6 @@
   --color1: #dc5f00;
   --color2: #eeeeee;
   --color3: #373a40;
-  --color4: #686d76;
 }
 
 a {
@@ -36,16 +35,20 @@ body {
   padding: 12px 0;
 }
 
-.title {
+.header .subtitle {
+  color: var(--color3);
+}
+
+.header .title {
   font-size: 36pt;
 }
 
-.title a {
+.header .title a {
   color: var(--color1);
 }
 
-.subtitle {
-  color: var(--color4);
+.single {
+  font-size: 24pt;
 }
 
 @media (min-width: 800px) {

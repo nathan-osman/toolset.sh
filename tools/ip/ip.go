@@ -2,11 +2,10 @@ package ip
 
 import (
 	"github.com/nathan-osman/toolset.sh/manager"
-	"github.com/nathan-osman/toolset.sh/util"
+	"github.com/nathan-osman/toolset.sh/templates"
 )
 
 var (
-	t    = util.MustCreateTemplate(`<div class="text-2xl">{{.}}</div>`)
 	meta = &manager.Meta{
 		Name:       "IP Address",
 		Desc:       "return the client IP address",
@@ -24,7 +23,13 @@ func (r *Response) Text() string {
 }
 
 func (r *Response) Html() string {
-	return util.MustRenderTemplateToString(t, r.Text())
+	return templates.Render(
+		"templates/fragments/tools/single.html",
+		templates.C{
+			"desc":  "Your current IP address is:",
+			"value": r.Text(),
+		},
+	)
 }
 
 type IP struct{}

@@ -3,6 +3,7 @@ package uuid
 import (
 	"github.com/gofrs/uuid/v5"
 	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/templates"
 	"github.com/nathan-osman/toolset.sh/util"
 )
 
@@ -14,7 +15,6 @@ const (
 )
 
 var (
-	t    = util.MustCreateTemplate(`<div class="font-mono text-lg">{{.}}</div>`)
 	meta = &manager.Meta{
 		Name: "Generate UUID",
 		Desc: "generate a UUID (universally unique identifier)",
@@ -48,7 +48,13 @@ func (r *Response) Text() string {
 }
 
 func (r *Response) Html() string {
-	return util.MustRenderTemplateToString(t, r.Text())
+	return templates.Render(
+		"templates/fragments/tools/single.html",
+		templates.C{
+			"desc":  "Your generated UUID is:",
+			"value": r.Text(),
+		},
+	)
 }
 
 type Uuid struct{}

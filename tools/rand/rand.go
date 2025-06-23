@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/templates"
 	"github.com/nathan-osman/toolset.sh/util"
 )
 
@@ -15,7 +16,6 @@ const (
 )
 
 var (
-	t    = util.MustCreateTemplate(`<div class="text-2xl">{{.}}</div>`)
 	meta = &manager.Meta{
 		Name: "Random number",
 		Desc: "generate a random number",
@@ -44,7 +44,13 @@ func (r *Response) Text() string {
 }
 
 func (r *Response) Html() string {
-	return util.MustRenderTemplateToString(t, r.Text())
+	return templates.Render(
+		"templates/fragments/tools/single.html",
+		templates.C{
+			"desc":  "Your random number is:",
+			"value": r.Text(),
+		},
+	)
 }
 
 type Rand struct{}

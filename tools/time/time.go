@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/templates"
 	"github.com/nathan-osman/toolset.sh/util"
 )
 
@@ -20,7 +21,6 @@ const (
 )
 
 var (
-	t    = util.MustCreateTemplate(`<div class="text-xl">{{.}}</div>`)
 	meta = &manager.Meta{
 		Name: "Date & Time",
 		Desc: "return the current date and time",
@@ -54,7 +54,13 @@ func (r *Response) Text() string {
 }
 
 func (r *Response) Html() string {
-	return util.MustRenderTemplateToString(t, r.Text())
+	return templates.Render(
+		"templates/fragments/tools/single.html",
+		templates.C{
+			"desc":  "The current date / time is:",
+			"value": r.Text(),
+		},
+	)
 }
 
 type Time struct{}
