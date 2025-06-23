@@ -1,6 +1,7 @@
 package server
 
 import (
+	"mime"
 	"net/http"
 	"strings"
 
@@ -18,9 +19,24 @@ const (
 
 func (s *Server) sendOutput(c *gin.Context, r manager.Output) {
 
-	var t outputType = outputHtml
+	var (
+		t = outputHtml
+		a = c.GetHeader("Accept")
+	)
 
-	// TODO: check the accept header
+	// Parse the Accept header
+	mediaType, _, err := mime.ParseMediaType(a)
+	if err != nil {
+		panic(err)
+	}
+
+	// Change the output type based on the contents of the header
+	switch {
+	case mediaType == "application/json":
+		t = outputJson
+	case mediaType == "text/plain":
+		t = outputText
+	}
 
 	// Check for cURL with the default Accept: header
 	if strings.HasPrefix(c.GetHeader("User-Agent"), "curl/") &&

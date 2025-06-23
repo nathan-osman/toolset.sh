@@ -1,0 +1,23 @@
+toolset.sh
+==========
+
+Welcome! This site contains a number of utilities for things such as:
+
+- generating random numbers
+- generating UUIDs
+- looking up the current date / time
+- finding your current IP address
+
+These tools are typically used as follows:
+
+http[s]:// toolset.sh / [tool name] ? param1=value
+
+For example, to retrieve the current date and time as a Unix timestamp:
+
+$ curl toolset.sh/time?format=unix
+1750704248
+
+By default, curl clients get text/plain responses. If you want the response in a different format, just specify a custom Accept: header in your request:
+
+$ curl -H "Accept: application/json" toolset.sh/time?format=unix
+{"value":"1750704248"}

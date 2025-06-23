@@ -8,7 +8,7 @@ import (
 type indexOutput struct{}
 
 func (i *indexOutput) Text() string {
-	return "Coming soon!"
+	return templates.Render("templates/index.txt", templates.NoContext)
 }
 
 func (i *indexOutput) Html() string {
