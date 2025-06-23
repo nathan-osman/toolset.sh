@@ -1,20 +1,24 @@
 module github.com/nathan-osman/toolset.sh
 
-go 1.23.0
+go 1.24
+
+toolchain go1.24.2
 
 require (
+	github.com/flosch/pongo2/v6 v6.0.0
 	github.com/gin-contrib/static v1.1.5
 	github.com/gin-gonic/gin v1.10.1
 	github.com/gofrs/uuid/v5 v5.3.2
+	github.com/nathan-osman/pongo2-embed-loader v1.0.1
 	github.com/rs/zerolog v1.34.0
-	github.com/urfave/cli/v2 v2.27.6
+	github.com/urfave/cli/v2 v2.27.7
 )
 
 require (
 	github.com/bytedance/sonic v1.13.2 // indirect
 	github.com/bytedance/sonic/loader v0.2.4 // indirect
 	github.com/cloudwego/base64x v0.1.5 // indirect
-	github.com/cpuguy83/go-md2man/v2 v2.0.5 // indirect
+	github.com/cpuguy83/go-md2man/v2 v2.0.7 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.8 // indirect
 	github.com/gin-contrib/sse v1.0.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
