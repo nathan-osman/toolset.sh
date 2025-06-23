@@ -74,7 +74,9 @@ func (o *outputError) Text() string {
 }
 
 func (o *outputError) Html() string {
-	return o.Text()
+	return templates.Render("templates/error.html", templates.C{
+		"msg": o.Error,
+	})
 }
 
 // TODO: status code for errors

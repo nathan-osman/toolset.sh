@@ -1,4 +1,12 @@
 {# Single value template #}
 
+<script>
+function copy() {
+  navigator.clipboard.writeText(
+    document.getElementById('value').textContent,
+  )
+}
+</script>
+
 <p>{{ desc }}</p>
-<div class="single">{{ value }}</div>
+<div class="single" id="value" title="Click to copy" onclick="copy()">{{ value }}</div>

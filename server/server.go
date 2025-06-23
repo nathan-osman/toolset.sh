@@ -39,6 +39,19 @@ func New(addr string, m *manager.Manager) (*Server, error) {
 		}
 	)
 
+	// TODO: use correct HTTP status code for errors
+
+	// Handle errors by rendering the error page
+	r.Use(gin.CustomRecovery(func(c *gin.Context, err any) {
+		msg := "an unknown error has occurred"
+		switch v := err.(type) {
+		case error:
+			msg = v.Error()
+		}
+		s.sendError(c, msg)
+		c.Abort()
+	}))
+
 	// Add the index page
 	r.GET("/", s.index)
 

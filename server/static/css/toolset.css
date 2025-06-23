@@ -21,6 +21,7 @@ body {
   background-color: var(--color1);
   color: var(--color2);
   font-family: sans-serif;
+  font-size: 14pt;
   margin: 0;
 }
 
@@ -35,20 +36,27 @@ body {
   padding: 12px 0;
 }
 
-.header .subtitle {
-  color: var(--color3);
-}
-
 .header .title {
   font-size: 36pt;
+  margin: 0;
 }
 
 .header .title a {
   color: var(--color1);
 }
 
+.header .subtitle {
+  color: var(--color3);
+}
+
 .single {
+  cursor: pointer;
   font-size: 24pt;
+}
+
+.title {
+  font-size: 24pt;
+  margin: 16px 0;
 }
 
 @media (min-width: 800px) {

@@ -51,7 +51,7 @@ func (r *Response) Html() string {
 	return templates.Render(
 		"templates/fragments/tools/single.html",
 		templates.C{
-			"desc":  "Your generated UUID is:",
+			"desc":  "Your randomly generated UUID is:",
 			"value": r.Text(),
 		},
 	)
