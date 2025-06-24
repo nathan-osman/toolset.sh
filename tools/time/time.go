@@ -57,7 +57,7 @@ func (r *Response) Html() string {
 	return templates.Render(
 		"templates/fragments/tools/single.html",
 		templates.C{
-			"desc":  "The current date / time is:",
+			"desc":  "The current UTC date / time is:",
 			"value": r.Text(),
 		},
 	)

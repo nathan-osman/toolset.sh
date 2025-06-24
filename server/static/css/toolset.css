@@ -49,9 +49,50 @@ body {
   color: var(--color3);
 }
 
+.icon {
+  width: 24px;
+}
+
+@keyframes popup {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.popup {
+  animation: popup 1s;
+  background-color: var(--color3);
+  border-radius: 4px;
+  opacity: 0;
+  padding: 8px 16px;
+  position: absolute;
+  bottom: 100%;
+}
+
 .single {
+  align-items: flex-start;
+  column-gap: 16px;
   cursor: pointer;
+  display: flex;
+  position: relative;
+}
+
+.single .value {
   font-size: 24pt;
+  overflow: auto;
+}
+
+.single *:first-child {
+  flex-grow: 1;
 }
 
 .title {

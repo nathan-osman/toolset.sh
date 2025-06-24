@@ -1,12 +1,7 @@
 {# Single value template #}
 
-<script>
-function copy() {
-  navigator.clipboard.writeText(
-    document.getElementById('value').textContent,
-  )
-}
-</script>
-
 <p>{{ desc }}</p>
-<div class="single" id="value" title="Click to copy" onclick="copy()">{{ value }}</div>
+<div class="single" title="Click to copy">
+  <div class="value">{{ value }}</div>
+  <img src="/static/img/copy.svg" class="icon" />
+</div>
