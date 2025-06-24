@@ -25,6 +25,26 @@ body {
   margin: 0;
 }
 
+.button {
+  border: 2px solid var(--color2);
+  border-radius: 8px;
+  column-gap: 16px;
+  display: flex;
+  padding: 12px 32px;
+}
+
+.button:hover {
+  background-color: var(--color2);
+  color: var(--color3);
+  text-decoration: none;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .container {
   margin: auto 12px;
 }
@@ -49,8 +69,14 @@ body {
   color: var(--color3);
 }
 
-.icon {
-  width: 24px;
+.index {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+}
+
+.index .title {
+  margin-bottom: 8px;
 }
 
 @keyframes popup {
@@ -97,10 +123,17 @@ body {
 
 .title {
   font-size: 24pt;
-  margin: 16px 0;
 }
 
 @media (min-width: 800px) {
+  .buttons {
+    flex-direction: row;
+  }
+
+  .buttons .button {
+    flex: 0 0 50%;
+  }
+
   .container {
     margin: auto;
     width: 720px;
