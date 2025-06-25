@@ -36,9 +36,23 @@ func (s *Server) sendOutput(c *gin.Context, r manager.Output) {
 		return
 	}
 
-	// Check for cURL with the default Accept: header
-	if strings.HasPrefix(c.GetHeader("User-Agent"), "curl/") &&
-		c.GetHeader("Accept") == "*/*" {
+	// Check for cURL / wget with the default Accept: header
+	var (
+		a      = c.GetHeader("User-Agent")
+		isCurl = strings.HasPrefix(a, "curl/")
+		isWget = strings.HasPrefix(a, "Wget/")
+	)
+	if (isCurl || isWget) && c.GetHeader("Accept") == "*/*" {
+		t = outputText
+	}
+
+	// Allow the output= param to override everything
+	switch c.Query("output") {
+	case "json":
+		t = outputJson
+	case "html":
+		t = outputHtml
+	case "text":
 		t = outputText
 	}
 
