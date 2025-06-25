@@ -125,6 +125,12 @@ body {
 .single .value {
   font-size: 24pt;
   overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.single .value.small {
+  font-size: revert;
 }
 
 .single *:first-child {

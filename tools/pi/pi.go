@@ -26,7 +26,7 @@ func (r *Response) Html() string {
 	return templates.Render(
 		"templates/fragments/tools/single.html",
 		templates.C{
-			"desc":  "The value of Pi to 60 decimal places is:",
+			"desc":  "The value of Pi to 200 decimal places is:",
 			"value": r.Text(),
 		},
 	)
@@ -44,6 +44,6 @@ func (p *Pi) Meta() *manager.Meta {
 
 func (p *Pi) Run(inp *manager.Input) manager.Output {
 	return &Response{
-		Value: "3.14159265358979323846264338327950288419716939937510582097494",
+		Value: "3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196",
 	}
 }

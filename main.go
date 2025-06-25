@@ -9,6 +9,7 @@ import (
 	"github.com/nathan-osman/toolset.sh/manager"
 	"github.com/nathan-osman/toolset.sh/server"
 	"github.com/nathan-osman/toolset.sh/tools/ip"
+	"github.com/nathan-osman/toolset.sh/tools/lorem"
 	"github.com/nathan-osman/toolset.sh/tools/pi"
 	"github.com/nathan-osman/toolset.sh/tools/rand"
 	"github.com/nathan-osman/toolset.sh/tools/time"
@@ -34,6 +35,7 @@ func main() {
 			// Create the manager and register all of the tools
 			m := manager.New()
 			m.Register(ip.New())
+			m.Register(lorem.New())
 			m.Register(pi.New())
 			m.Register(rand.New())
 			m.Register(time.New())
