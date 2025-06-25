@@ -104,6 +104,16 @@ body {
   bottom: 100%;
 }
 
+.properties {
+  display: inline-grid;
+  gap: 4px 8px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.properties .name {
+  font-weight: bold;
+}
+
 .single {
   align-items: flex-start;
   column-gap: 16px;

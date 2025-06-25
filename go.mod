@@ -9,6 +9,7 @@ require (
 	github.com/gin-contrib/static v1.1.5
 	github.com/gin-gonic/gin v1.10.1
 	github.com/gofrs/uuid/v5 v5.3.2
+	github.com/mileusna/useragent v1.3.5
 	github.com/nathan-osman/pongo2-embed-loader v1.0.1
 	github.com/rs/zerolog v1.34.0
 	github.com/urfave/cli/v2 v2.27.7

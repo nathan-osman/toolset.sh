@@ -12,6 +12,7 @@ import (
 	"github.com/nathan-osman/toolset.sh/tools/pi"
 	"github.com/nathan-osman/toolset.sh/tools/rand"
 	"github.com/nathan-osman/toolset.sh/tools/time"
+	"github.com/nathan-osman/toolset.sh/tools/useragent"
 	"github.com/nathan-osman/toolset.sh/tools/uuid"
 	"github.com/urfave/cli/v2"
 )
@@ -36,6 +37,7 @@ func main() {
 			m.Register(pi.New())
 			m.Register(rand.New())
 			m.Register(time.New())
+			m.Register(useragent.New())
 			m.Register(uuid.New())
 
 			// Create the server

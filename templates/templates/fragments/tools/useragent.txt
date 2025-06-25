@@ -1,0 +1,6 @@
+{{ response.Value }}
+
+Browser:    {{ response.Browser }}
+Version:    {{ response.Version }}
+OS:         {{ response.OS }}
+OS version: {{ response.OSVersion }}
