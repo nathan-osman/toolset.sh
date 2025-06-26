@@ -22,7 +22,7 @@ const (
 
 var (
 	meta = &manager.Meta{
-		Name: "Date & Time",
+		Name: "Current Time",
 		Desc: "return the current date and time",
 		Params: []*manager.Param{
 			{
@@ -41,7 +41,8 @@ var (
 				},
 			},
 		},
-		RouteNames: []string{"date", "time"},
+		RouteName:      "time",
+		AlternateNames: []string{},
 	}
 )
 

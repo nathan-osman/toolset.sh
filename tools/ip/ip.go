@@ -7,10 +7,11 @@ import (
 
 var (
 	meta = &manager.Meta{
-		Name:       "IP Address",
-		Desc:       "return the client IP address",
-		Params:     []*manager.Param{},
-		RouteNames: []string{"ip"},
+		Name:           "IP Address",
+		Desc:           "return the client IP address",
+		Params:         []*manager.Param{},
+		RouteName:      "ip-address",
+		AlternateNames: []string{"ip"},
 	}
 )
 

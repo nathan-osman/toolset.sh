@@ -22,10 +22,11 @@ type Param struct {
 
 // Meta provides information about a tool.
 type Meta struct {
-	Name       string   `json:"name"`
-	Desc       string   `json:"desc"`
-	Params     []*Param `json:"params"`
-	RouteNames []string `json:"route_names"`
+	Name           string   `json:"name"`
+	Desc           string   `json:"desc"`
+	Params         []*Param `json:"params"`
+	RouteName      string   `json:"route_name"`
+	AlternateNames []string `json:"alternate_names"`
 }
 
 // Input represents data available to the tool.
@@ -48,28 +49,37 @@ type Tool interface {
 
 // Manager keeps track of the available tools and provides access by command name.
 type Manager struct {
-	tools map[string]Tool
+	tools          map[string]Tool
+	alternateNames map[string]string
 }
 
 // New creates a new tool manager.
 func New() *Manager {
 	return &Manager{
-		tools: make(map[string]Tool),
+		tools:          make(map[string]Tool),
+		alternateNames: make(map[string]string),
 	}
 }
 
 // Register adds the specified tool to the map.
 func (m *Manager) Register(t Tool) {
-	for _, k := range t.Meta().RouteNames {
-		m.tools[k] = t
+	n := t.Meta().RouteName
+	m.tools[n] = t
+	for _, k := range t.Meta().AlternateNames {
+		m.alternateNames[k] = n
 	}
 }
 
-// Get returns the specified tool based on its name.
-func (m *Manager) Get(name string) (Tool, error) {
+// Get returns the specified tool based on its name. If an alternate name for
+// the tool was used, the default is returned - perfect for a 301 redirect.
+func (m *Manager) Get(name string) (Tool, string, error) {
 	t, ok := m.tools[name]
 	if !ok {
-		return nil, fmt.Errorf("\"%s\" is not a recognized tool", name)
+		n, ok := m.alternateNames[name]
+		if !ok {
+			return nil, "", fmt.Errorf("\"%s\" is not a recognized tool", name)
+		}
+		return nil, n, nil
 	}
-	return t, nil
+	return t, "", nil
 }

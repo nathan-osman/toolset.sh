@@ -7,10 +7,11 @@ import (
 
 var (
 	meta = &manager.Meta{
-		Name:       "Pi",
-		Desc:       "return the value for Pi",
-		Params:     []*manager.Param{},
-		RouteNames: []string{"pi"},
+		Name:           "Pi",
+		Desc:           "return the value for Pi",
+		Params:         []*manager.Param{},
+		RouteName:      "pi",
+		AlternateNames: []string{},
 	}
 )
 

@@ -35,7 +35,8 @@ var (
 				},
 			},
 		},
-		RouteNames: []string{"uuid", "uuid4"},
+		RouteName:      "uuid",
+		AlternateNames: []string{},
 	}
 )
 

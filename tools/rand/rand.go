@@ -31,7 +31,8 @@ var (
 				Default: "1",
 			},
 		},
-		RouteNames: []string{"rand", "random"},
+		RouteName:      "random",
+		AlternateNames: []string{"rand"},
 	}
 )
 

@@ -9,10 +9,11 @@ import (
 
 var (
 	meta = &manager.Meta{
-		Name:       "User Agent",
-		Desc:       "return information about the user agent",
-		Params:     []*manager.Param{},
-		RouteNames: []string{"user-agent", "useragent", "ua"},
+		Name:           "User Agent",
+		Desc:           "return information about the user agent",
+		Params:         []*manager.Param{},
+		RouteName:      "user-agent",
+		AlternateNames: []string{"ua"},
 	}
 	tmplText = util.CompileTemplate(`{{.Value}}
 
