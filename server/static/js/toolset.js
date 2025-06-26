@@ -8,17 +8,18 @@ window.copyElement = function($el) {
 
 // Initialize all "box" elements (copyable)
 $('.box').each((i, el) => {
-  const $v = $('<span>').text("Click to copy")
+  const $c = $('<span>').text("Click to copy")
+  const $v = $(el).find('.value')
   $(el)
     .css('position', 'relative')
     .append(
       $('<div>')
         .addClass('copy')
         .append($('<i>').addClass('fa-solid fa-copy'))
-        .append($v)
+        .append($c)
     )
     .click(() => {
       copyElement($v)
-      $v.text("Copied!")
+      $c.text("Copied!")
     })
 })
