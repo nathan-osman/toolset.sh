@@ -29,6 +29,12 @@ func main() {
 				EnvVars: []string{"SERVER_ADDR"},
 				Usage:   "HTTP address to listen on",
 			},
+			&cli.StringFlag{
+				Name:    "server-name",
+				Value:   "toolset.sh",
+				EnvVars: []string{"SERVER_NAME"},
+				Usage:   "domain name used for URLs",
+			},
 		},
 		Action: func(c *cli.Context) error {
 
@@ -43,7 +49,11 @@ func main() {
 			m.Register(uuid.New())
 
 			// Create the server
-			s, err := server.New(c.String("server-addr"), m)
+			s, err := server.New(
+				c.String("server-addr"),
+				c.String("server-name"),
+				m,
+			)
 			if err != nil {
 				return err
 			}

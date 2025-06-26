@@ -20,16 +20,18 @@ var (
 
 // Server provides the web interface.
 type Server struct {
+	name    string
 	server  http.Server
 	logger  zerolog.Logger
 	manager *manager.Manager
 }
 
 // New create a new Server instance.
-func New(addr string, m *manager.Manager) (*Server, error) {
+func New(addr, name string, m *manager.Manager) (*Server, error) {
 	var (
 		r = gin.New()
 		s = &Server{
+			name: name,
 			server: http.Server{
 				Addr:    addr,
 				Handler: r,
