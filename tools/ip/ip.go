@@ -24,7 +24,7 @@ func (r *Response) Text() string {
 
 func (r *Response) Html() string {
 	return templates.Render(
-		"templates/fragments/tools/single.html",
+		"templates/fragments/tools/ip.html",
 		templates.C{
 			"desc":  "Your current IP address is:",
 			"value": r.Text(),
