@@ -6,6 +6,7 @@
   --color1: #dc5f00;
   --color2: #eeeeee;
   --color3: #373a40;
+  --color4: #a54700;
 }
 
 html,
@@ -28,6 +29,36 @@ body {
   font-family: sans-serif;
   font-size: 14pt;
   margin: 0;
+}
+
+.box {
+  background-color: var(--color4);
+  border-radius: 8px 0 8px 8px;
+  cursor: pointer;
+  margin: 16px 0;
+  padding: 16px;
+}
+
+.box .value {
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.box .value.big {
+  font-size: 24pt;
+}
+
+.box .copy {
+  background-color: var(--color4);
+  border-radius: 8px 8px 0 0;
+  bottom: 100%;
+  column-gap: 8px;
+  display: flex;
+  font-size: default;
+  padding: 8px 16px;
+  position: absolute;
+  right: 0;
 }
 
 .button {
@@ -93,29 +124,10 @@ body {
   margin-bottom: 8px;
 }
 
-@keyframes popup {
-  0% {
-    opacity: 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  75% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-.popup {
-  animation: popup 1s;
-  background-color: var(--color3);
-  border-radius: 4px;
-  opacity: 0;
-  padding: 8px 16px;
-  position: absolute;
-  bottom: 100%;
+.line {
+  background-color: var(--color2);
+  height: 1px;
+  margin: 32px 0;
 }
 
 .properties {
@@ -126,29 +138,6 @@ body {
 
 .properties .name {
   font-weight: bold;
-}
-
-.single {
-  align-items: flex-start;
-  column-gap: 16px;
-  cursor: pointer;
-  display: flex;
-  position: relative;
-}
-
-.single .value {
-  font-size: 24pt;
-  overflow: auto;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.single .value.small {
-  font-size: revert;
-}
-
-.single *:first-child {
-  flex-grow: 1;
 }
 
 .title {

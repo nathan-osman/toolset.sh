@@ -6,22 +6,19 @@ window.copyElement = function($el) {
   navigator.clipboard.writeText($el.text())
 }
 
-/**
- * Show a popup attached to the provided element
- */
-window.showPopup = function($el, text) {
-  $el.find('.popup').remove()
-  $el.append(
-    $('<div>').addClass('popup').text(text),
-  )
-}
-
-// Initialize all 'single' components
-$('.single').each((i, el) => {
-  const $el = $(el)
-  const $v = $el.find('.value')
-  $el.click(() => {
-    copyElement($v)
-    showPopup($el, "Copied!")
-  })
+// Initialize all "box" elements (copyable)
+$('.box').each((i, el) => {
+  const $v = $('<span>').text("Click to copy")
+  $(el)
+    .css('position', 'relative')
+    .append(
+      $('<div>')
+        .addClass('copy')
+        .append($('<i>').addClass('fa-solid fa-copy'))
+        .append($v)
+    )
+    .click(() => {
+      copyElement($v)
+      $v.text("Copied!")
+    })
 })

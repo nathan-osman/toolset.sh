@@ -20,6 +20,9 @@ var (
 
 	// NoContext represents an empty context.
 	NoContext = C{}
+
+	// Name is the server name used for generating URLs
+	Name string
 )
 
 // Render the specified template by name with the provided context.
@@ -28,6 +31,7 @@ func Render(name string, ctx C) string {
 	if err != nil {
 		panic(err)
 	}
+	ctx["name"] = Name
 	v, err := t.Execute(pongo2.Context(ctx))
 	if err != nil {
 		panic(err)

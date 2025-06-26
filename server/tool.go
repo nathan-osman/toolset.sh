@@ -4,7 +4,28 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/templates"
 )
+
+type toolOutput struct {
+	meta   *manager.Meta
+	output manager.Output
+}
+
+func (t *toolOutput) Text() string {
+	return t.output.Text()
+}
+
+func (t *toolOutput) Html() string {
+	return templates.Render(
+		"templates/tool.html",
+		templates.C{
+			"meta":   t.meta,
+			"output": t.output.Html(),
+		},
+	)
+}
 
 func (s *Server) tool(c *gin.Context) {
 
@@ -30,11 +51,17 @@ func (s *Server) tool(c *gin.Context) {
 		return
 	}
 
+	// Run the tool and obtain its output
+	o := t.Run(
+		convertContextToInput(c, t),
+	)
+
 	// Send the output to the client
 	s.sendOutput(
 		c,
-		t.Run(
-			convertContextToInput(c, t),
-		),
+		&toolOutput{
+			meta:   t.Meta(),
+			output: o,
+		},
 	)
 }

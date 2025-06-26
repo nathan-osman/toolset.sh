@@ -21,7 +21,7 @@ var (
 			{
 				Name:    paramNum,
 				Desc:    "number of paragraphs to generate",
-				Default: "3",
+				Default: "1",
 			},
 		},
 		RouteName:      "lorem-ipsum",
@@ -65,7 +65,7 @@ func (l *Lorem) Meta() *manager.Meta {
 
 func (l *Lorem) Run(i *manager.Input) manager.Output {
 	var (
-		n = util.GetIntParam(i.Params, paramNum, 3)
+		n = util.GetIntParam(i.Params, paramNum, 1)
 		v = paragraphs
 	)
 	if n < 0 || n > 100 {

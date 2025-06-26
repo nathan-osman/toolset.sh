@@ -1,9 +1,8 @@
 {# Single value template #}
 
 <p>{{ desc }}</p>
-<div class="single" title="Click to copy">
-  <div class="value{% if small %} small{% endif %}">{{ value }}</div>
-  <i class="fa-solid fa-copy"></i>
+<div class="box">
+  <div class="value{% if not small %} big{% endif %}">{{ value }}</div>
 </div>
 
 {% block extra %}{% endblock %}

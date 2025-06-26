@@ -8,6 +8,7 @@ import (
 
 	"github.com/nathan-osman/toolset.sh/manager"
 	"github.com/nathan-osman/toolset.sh/server"
+	"github.com/nathan-osman/toolset.sh/templates"
 	"github.com/nathan-osman/toolset.sh/tools/ip"
 	"github.com/nathan-osman/toolset.sh/tools/lorem"
 	"github.com/nathan-osman/toolset.sh/tools/pi"
@@ -48,12 +49,11 @@ func main() {
 			m.Register(useragent.New())
 			m.Register(uuid.New())
 
+			// Set the server name (for the templates)
+			templates.Name = c.String("server-name")
+
 			// Create the server
-			s, err := server.New(
-				c.String("server-addr"),
-				c.String("server-name"),
-				m,
-			)
+			s, err := server.New(c.String("server-addr"), m)
 			if err != nil {
 				return err
 			}
