@@ -14,6 +14,9 @@ import (
 type outputFormat int
 
 const (
+	contextStatusCode = "status_code"
+	contextRedirect   = "redirect"
+
 	outputJson outputFormat = iota
 	outputHtml
 	outputText
@@ -56,6 +59,17 @@ func (s *Server) sendOutput(c *gin.Context, r manager.Output) {
 		t = outputText
 	}
 
+	// If the output format is HTML and a redirect was set, use it
+	if t == outputHtml {
+		if v, ok := c.Get(contextRedirect); ok {
+			c.Redirect(
+				http.StatusMovedPermanently,
+				v.(string),
+			)
+			return
+		}
+	}
+
 	var v []byte
 
 	// Set up the response for the selected type
@@ -73,9 +87,15 @@ func (s *Server) sendOutput(c *gin.Context, r manager.Output) {
 		c.Header("Content-Type", "text/plain; charset=utf-8")
 	}
 
+	// Get the status code
+	statusCode := http.StatusOK
+	if v, ok := c.Get(contextStatusCode); ok {
+		statusCode = v.(int)
+	}
+
 	// Write the response
 	c.Header("Content-Length", strconv.Itoa(len(v)))
-	c.Writer.WriteHeader(http.StatusOK)
+	c.Writer.WriteHeader(statusCode)
 	c.Writer.Write(v)
 }
 
@@ -93,8 +113,7 @@ func (o *outputError) Html() string {
 	})
 }
 
-// TODO: status code for errors
-
 func (s *Server) sendError(c *gin.Context, msg string) {
+	c.Set(contextStatusCode, http.StatusInternalServerError)
 	s.sendOutput(c, &outputError{Error: msg})
 }

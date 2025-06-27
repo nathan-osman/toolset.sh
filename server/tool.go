@@ -1,8 +1,6 @@
 package server
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 	"github.com/nathan-osman/toolset.sh/manager"
 	"github.com/nathan-osman/toolset.sh/templates"
@@ -38,17 +36,15 @@ func (s *Server) tool(c *gin.Context) {
 		panic(err)
 	}
 
-	// If the canonical name was not used, redirect to it
-	if t == nil {
+	// If the canonical name was not used, indicate that we want to redirect
+	// to it; this is only a suggestion since we don't want to do that for
+	// text clients
+	if n != "" {
 		q := c.Request.URL.RawQuery
 		if len(q) != 0 {
 			q = "?" + q
 		}
-		c.Redirect(
-			http.StatusMovedPermanently,
-			"/"+n+q,
-		)
-		return
+		c.Set(contextRedirect, "/"+n+q)
 	}
 
 	// Run the tool and obtain its output

@@ -79,7 +79,7 @@ func (m *Manager) Get(name string) (Tool, string, error) {
 		if !ok {
 			return nil, "", fmt.Errorf("\"%s\" is not a recognized tool", name)
 		}
-		return nil, n, nil
+		return m.tools[n], n, nil
 	}
 	return t, "", nil
 }
