@@ -6,17 +6,17 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/nathan-osman/toolset.sh/manager"
 	"github.com/nathan-osman/toolset.sh/server"
 	"github.com/nathan-osman/toolset.sh/templates"
-	"github.com/nathan-osman/toolset.sh/tools/ip"
-	"github.com/nathan-osman/toolset.sh/tools/lorem"
-	"github.com/nathan-osman/toolset.sh/tools/pi"
-	"github.com/nathan-osman/toolset.sh/tools/rand"
-	"github.com/nathan-osman/toolset.sh/tools/time"
-	"github.com/nathan-osman/toolset.sh/tools/useragent"
-	"github.com/nathan-osman/toolset.sh/tools/uuid"
 	"github.com/urfave/cli/v2"
+
+	_ "github.com/nathan-osman/toolset.sh/tools/ip"
+	_ "github.com/nathan-osman/toolset.sh/tools/lorem"
+	_ "github.com/nathan-osman/toolset.sh/tools/pi"
+	_ "github.com/nathan-osman/toolset.sh/tools/rand"
+	_ "github.com/nathan-osman/toolset.sh/tools/time"
+	_ "github.com/nathan-osman/toolset.sh/tools/useragent"
+	_ "github.com/nathan-osman/toolset.sh/tools/uuid"
 )
 
 func main() {
@@ -39,21 +39,11 @@ func main() {
 		},
 		Action: func(c *cli.Context) error {
 
-			// Create the manager and register all of the tools
-			m := manager.New()
-			m.Register(ip.New())
-			m.Register(lorem.New())
-			m.Register(pi.New())
-			m.Register(rand.New())
-			m.Register(time.New())
-			m.Register(useragent.New())
-			m.Register(uuid.New())
-
 			// Set the server name (for the templates)
 			templates.Name = c.String("server-name")
 
 			// Create the server
-			s, err := server.New(c.String("server-addr"), m)
+			s, err := server.New(c.String("server-addr"))
 			if err != nil {
 				return err
 			}

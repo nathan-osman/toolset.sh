@@ -5,7 +5,7 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/registry"
 	"github.com/nathan-osman/toolset.sh/templates"
 	"github.com/nathan-osman/toolset.sh/util"
 )
@@ -16,10 +16,11 @@ const (
 )
 
 var (
-	meta = &manager.Meta{
-		Name: "Random number",
-		Desc: "generate a random number",
-		Params: []*manager.Param{
+	meta = &registry.Meta{
+		Category: registry.CategoryMath,
+		Name:     "Random number",
+		Desc:     "generate a random number",
+		Params: []*registry.Param{
 			{
 				Name:    paramMin,
 				Desc:    "minimum value, as a floating point number",
@@ -56,15 +57,15 @@ func (r *Response) Html() string {
 
 type Rand struct{}
 
-func New() *Rand {
-	return &Rand{}
+func init() {
+	registry.Register(&Rand{})
 }
 
-func (r *Rand) Meta() *manager.Meta {
+func (r *Rand) Meta() *registry.Meta {
 	return meta
 }
 
-func (r *Rand) Run(i *manager.Input) manager.Output {
+func (r *Rand) Run(i *registry.Input) registry.Output {
 	var (
 		b   = make([]byte, 8)
 		min = util.GetFloatParam(i.Params, paramMin, 0.0)

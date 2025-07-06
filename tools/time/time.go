@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/registry"
 	"github.com/nathan-osman/toolset.sh/templates"
 	"github.com/nathan-osman/toolset.sh/util"
 )
@@ -21,15 +21,16 @@ const (
 )
 
 var (
-	meta = &manager.Meta{
-		Name: "Current Time",
-		Desc: "return the current date and time",
-		Params: []*manager.Param{
+	meta = &registry.Meta{
+		Category: registry.CategoryDateTime,
+		Name:     "Current Time",
+		Desc:     "return the current date and time",
+		Params: []*registry.Param{
 			{
 				Name:    paramFormat,
 				Desc:    "format for date / time",
 				Default: formatDefault,
-				Options: []*manager.Option{
+				Options: []*registry.Option{
 					{
 						Name:  formatDefault,
 						Label: "default",
@@ -66,15 +67,15 @@ func (r *Response) Html() string {
 
 type Time struct{}
 
-func New() *Time {
-	return &Time{}
+func init() {
+	registry.Register(&Time{})
 }
 
-func (t *Time) Meta() *manager.Meta {
+func (t *Time) Meta() *registry.Meta {
 	return meta
 }
 
-func (t *Time) Run(i *manager.Input) manager.Output {
+func (t *Time) Run(i *registry.Input) registry.Output {
 	var (
 		n = time.Now()
 		f = util.GetStringParam(i.Params, paramFormat, formatDefault)

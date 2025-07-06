@@ -2,7 +2,7 @@ package uuid
 
 import (
 	"github.com/gofrs/uuid/v5"
-	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/registry"
 	"github.com/nathan-osman/toolset.sh/templates"
 	"github.com/nathan-osman/toolset.sh/util"
 )
@@ -15,15 +15,16 @@ const (
 )
 
 var (
-	meta = &manager.Meta{
-		Name: "Generate UUID",
-		Desc: "generate a UUID (universally unique identifier)",
-		Params: []*manager.Param{
+	meta = &registry.Meta{
+		Category: registry.CategoryProgramming,
+		Name:     "Generate UUID",
+		Desc:     "generate a UUID (universally unique identifier)",
+		Params: []*registry.Param{
 			{
 				Name:    paramType,
 				Desc:    "type of UUID",
 				Default: typeUuid4,
-				Options: []*manager.Option{
+				Options: []*registry.Option{
 					{
 						Name:  typeUuid4,
 						Label: "UUID version 4",
@@ -60,15 +61,15 @@ func (r *Response) Html() string {
 
 type Uuid struct{}
 
-func New() *Uuid {
-	return &Uuid{}
+func init() {
+	registry.Register(&Uuid{})
 }
 
-func (u *Uuid) Meta() *manager.Meta {
+func (u *Uuid) Meta() *registry.Meta {
 	return meta
 }
 
-func (u *Uuid) Run(i *manager.Input) manager.Output {
+func (u *Uuid) Run(i *registry.Input) registry.Output {
 	var (
 		v   uuid.UUID
 		err error

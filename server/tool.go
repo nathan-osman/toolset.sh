@@ -2,13 +2,13 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/registry"
 	"github.com/nathan-osman/toolset.sh/templates"
 )
 
 type toolOutput struct {
-	meta   *manager.Meta
-	output manager.Output
+	meta   *registry.Meta
+	output registry.Output
 }
 
 func (t *toolOutput) Text() string {
@@ -31,7 +31,7 @@ func (s *Server) tool(c *gin.Context) {
 	name := c.Param("name")
 
 	// Attempt to find the tool
-	t, n, err := s.manager.Get(name)
+	t, n, err := registry.Get(name)
 	if err != nil {
 		panic(err)
 	}

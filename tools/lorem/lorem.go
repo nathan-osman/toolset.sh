@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/registry"
 	"github.com/nathan-osman/toolset.sh/templates"
 	"github.com/nathan-osman/toolset.sh/util"
 )
@@ -14,10 +14,11 @@ const (
 )
 
 var (
-	meta = &manager.Meta{
-		Name: "Lorem Ipsum",
-		Desc: "generate random text",
-		Params: []*manager.Param{
+	meta = &registry.Meta{
+		Category: registry.CategoryProgramming,
+		Name:     "Lorem Ipsum",
+		Desc:     "generate random text",
+		Params: []*registry.Param{
 			{
 				Name:    paramNum,
 				Desc:    "number of paragraphs to generate",
@@ -55,15 +56,15 @@ func (r *Response) Html() string {
 
 type Lorem struct{}
 
-func New() *Lorem {
-	return &Lorem{}
+func init() {
+	registry.Register(&Lorem{})
 }
 
-func (l *Lorem) Meta() *manager.Meta {
+func (l *Lorem) Meta() *registry.Meta {
 	return meta
 }
 
-func (l *Lorem) Run(i *manager.Input) manager.Output {
+func (l *Lorem) Run(i *registry.Input) registry.Output {
 	var (
 		n = util.GetIntParam(i.Params, paramNum, 1)
 		v = paragraphs

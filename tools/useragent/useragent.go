@@ -2,16 +2,17 @@ package useragent
 
 import (
 	"github.com/mileusna/useragent"
-	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/registry"
 	"github.com/nathan-osman/toolset.sh/templates"
 	"github.com/nathan-osman/toolset.sh/util"
 )
 
 var (
-	meta = &manager.Meta{
+	meta = &registry.Meta{
+		Category:       registry.CategoryNetwork,
 		Name:           "User Agent",
 		Desc:           "return information about the user agent",
-		Params:         []*manager.Param{},
+		Params:         []*registry.Param{},
 		RouteName:      "user-agent",
 		AlternateNames: []string{"ua"},
 	}
@@ -48,15 +49,15 @@ func (r *Response) Html() string {
 
 type UserAgent struct{}
 
-func New() *UserAgent {
-	return &UserAgent{}
+func init() {
+	registry.Register(&UserAgent{})
 }
 
-func (u *UserAgent) Meta() *manager.Meta {
+func (u *UserAgent) Meta() *registry.Meta {
 	return meta
 }
 
-func (u *UserAgent) Run(inp *manager.Input) manager.Output {
+func (u *UserAgent) Run(inp *registry.Input) registry.Output {
 	v := useragent.Parse(inp.C.GetHeader("User-Agent"))
 	return &Response{
 		Value:     v.String,

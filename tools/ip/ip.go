@@ -1,15 +1,16 @@
 package ip
 
 import (
-	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/registry"
 	"github.com/nathan-osman/toolset.sh/templates"
 )
 
 var (
-	meta = &manager.Meta{
+	meta = &registry.Meta{
+		Category:       registry.CategoryNetwork,
 		Name:           "IP Address",
 		Desc:           "return the client IP address",
-		Params:         []*manager.Param{},
+		Params:         []*registry.Param{},
 		RouteName:      "ip-address",
 		AlternateNames: []string{"ip"},
 	}
@@ -35,15 +36,15 @@ func (r *Response) Html() string {
 
 type IP struct{}
 
-func New() *IP {
-	return &IP{}
+func init() {
+	registry.Register(&IP{})
 }
 
-func (i *IP) Meta() *manager.Meta {
+func (i *IP) Meta() *registry.Meta {
 	return meta
 }
 
-func (i *IP) Run(inp *manager.Input) manager.Output {
+func (i *IP) Run(inp *registry.Input) registry.Output {
 	return &Response{
 		Value: inp.C.ClientIP(),
 	}

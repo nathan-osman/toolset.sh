@@ -1,15 +1,16 @@
 package pi
 
 import (
-	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/registry"
 	"github.com/nathan-osman/toolset.sh/templates"
 )
 
 var (
-	meta = &manager.Meta{
+	meta = &registry.Meta{
+		Category:       registry.CategoryMath,
 		Name:           "Pi",
 		Desc:           "return the value for Pi",
-		Params:         []*manager.Param{},
+		Params:         []*registry.Param{},
 		RouteName:      "pi",
 		AlternateNames: []string{},
 	}
@@ -35,15 +36,15 @@ func (r *Response) Html() string {
 
 type Pi struct{}
 
-func New() *Pi {
-	return &Pi{}
+func init() {
+	registry.Register(&Pi{})
 }
 
-func (p *Pi) Meta() *manager.Meta {
+func (p *Pi) Meta() *registry.Meta {
 	return meta
 }
 
-func (p *Pi) Run(inp *manager.Input) manager.Output {
+func (p *Pi) Run(inp *registry.Input) registry.Output {
 	return &Response{
 		Value: "3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196",
 	}

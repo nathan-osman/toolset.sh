@@ -8,7 +8,6 @@ import (
 
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
-	"github.com/nathan-osman/toolset.sh/manager"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
@@ -20,13 +19,12 @@ var (
 
 // Server provides the web interface.
 type Server struct {
-	server  http.Server
-	logger  zerolog.Logger
-	manager *manager.Manager
+	server http.Server
+	logger zerolog.Logger
 }
 
 // New create a new Server instance.
-func New(addr string, m *manager.Manager) (*Server, error) {
+func New(addr string) (*Server, error) {
 	var (
 		r = gin.New()
 		s = &Server{
@@ -34,12 +32,9 @@ func New(addr string, m *manager.Manager) (*Server, error) {
 				Addr:    addr,
 				Handler: r,
 			},
-			logger:  log.With().Str("package", "server").Logger(),
-			manager: m,
+			logger: log.With().Str("package", "server").Logger(),
 		}
 	)
-
-	// TODO: use correct HTTP status code for errors
 
 	// Handle errors by rendering the error page
 	r.Use(gin.CustomRecovery(func(c *gin.Context, err any) {

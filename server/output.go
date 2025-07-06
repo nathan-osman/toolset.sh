@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/nathan-osman/toolset.sh/manager"
+	"github.com/nathan-osman/toolset.sh/registry"
 	"github.com/nathan-osman/toolset.sh/templates"
 )
 
@@ -22,7 +22,7 @@ const (
 	outputText
 )
 
-func (s *Server) sendOutput(c *gin.Context, r manager.Output) {
+func (s *Server) sendOutput(c *gin.Context, r registry.Output) {
 
 	acceptHeader := c.GetHeader("Accept")
 
