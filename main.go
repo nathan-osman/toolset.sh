@@ -10,6 +10,7 @@ import (
 	"github.com/nathan-osman/toolset.sh/templates"
 	"github.com/urfave/cli/v2"
 
+	_ "github.com/nathan-osman/toolset.sh/tools/base64"
 	_ "github.com/nathan-osman/toolset.sh/tools/ip"
 	_ "github.com/nathan-osman/toolset.sh/tools/lorem"
 	_ "github.com/nathan-osman/toolset.sh/tools/pi"
