@@ -32,6 +32,10 @@ type Response struct {
 	OSVersion string `json:"os_version"`
 }
 
+func (r *Response) Json() any {
+	return r
+}
+
 func (r *Response) Text() string {
 	return util.RenderTemplate(tmplText, r)
 }

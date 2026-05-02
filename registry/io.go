@@ -12,6 +12,7 @@ type Input struct {
 
 // Output is used to format the results from a tool.
 type Output interface {
+	Json() any
 	Text() string
 	Html() string
 }

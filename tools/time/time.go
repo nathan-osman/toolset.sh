@@ -51,6 +51,10 @@ type Response struct {
 	Value string `json:"value"`
 }
 
+func (r *Response) Json() any {
+	return r
+}
+
 func (r *Response) Text() string {
 	return r.Value
 }

@@ -39,6 +39,10 @@ type Response struct {
 	Paragraphs []string `json:"paragraphs"`
 }
 
+func (r *Response) Json() any {
+	return r
+}
+
 func (r *Response) Text() string {
 	return strings.Join(r.Paragraphs, "\n\n")
 }

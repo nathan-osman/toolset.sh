@@ -41,6 +41,10 @@ type Response struct {
 	Value float64 `json:"value"`
 }
 
+func (r *Response) Json() any {
+	return r
+}
+
 func (r *Response) Text() string {
 	return fmt.Sprintf("%f", r.Value)
 }

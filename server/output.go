@@ -72,10 +72,16 @@ func (s *Server) sendOutput(c *gin.Context, r registry.Output) {
 
 	var v []byte
 
+	// Get the status code
+	statusCode := http.StatusOK
+	if v, ok := c.Get(contextStatusCode); ok {
+		statusCode = v.(int)
+	}
+
 	// Set up the response for the selected type
 	switch t {
 	case outputJson:
-		c.JSON(http.StatusOK, r)
+		c.JSON(statusCode, r.Json())
 		return
 	case outputHtml:
 		v = []byte(templates.Render("templates/base.html", templates.C{
@@ -87,12 +93,6 @@ func (s *Server) sendOutput(c *gin.Context, r registry.Output) {
 		c.Header("Content-Type", "text/plain; charset=utf-8")
 	}
 
-	// Get the status code
-	statusCode := http.StatusOK
-	if v, ok := c.Get(contextStatusCode); ok {
-		statusCode = v.(int)
-	}
-
 	// Write the response
 	c.Header("Content-Length", strconv.Itoa(len(v)))
 	c.Writer.WriteHeader(statusCode)
@@ -101,6 +101,10 @@ func (s *Server) sendOutput(c *gin.Context, r registry.Output) {
 
 type outputError struct {
 	Error string `json:"error"`
+}
+
+func (o *outputError) Json() any {
+	return o
 }
 
 func (o *outputError) Text() string {

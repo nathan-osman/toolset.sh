@@ -11,6 +11,10 @@ type toolOutput struct {
 	output registry.Output
 }
 
+func (t *toolOutput) Json() any {
+	return t.output.Json()
+}
+
 func (t *toolOutput) Text() string {
 	return t.output.Text()
 }
