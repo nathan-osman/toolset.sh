@@ -4,6 +4,11 @@ import (
 	"fmt"
 )
 
+const (
+	TypeString  = "string"
+	TypeInteger = "integer"
+)
+
 // Option represents a valid value for a parameter.
 type Option struct {
 	Name  string `json:"name"`
@@ -13,19 +18,28 @@ type Option struct {
 // Param provides parameter information.
 type Param struct {
 	Name    string    `json:"name"`
+	Label   string    `json:"label"`
+	Type    string    `json:"type"`
 	Desc    string    `json:"desc"`
 	Default string    `json:"default"`
 	Options []*Option `json:"options"`
 }
 
+// Action indicates the action to perform.
+type Action struct {
+	Name  string `json:"name"`
+	Label string `json:"label"`
+}
+
 // Meta provides information about a tool.
 type Meta struct {
-	Category       string   `json:"category"`
-	Name           string   `json:"name"`
-	Desc           string   `json:"desc"`
-	Params         []*Param `json:"params"`
-	RouteName      string   `json:"route_name"`
-	AlternateNames []string `json:"alternate_names"`
+	Category       string    `json:"category"`
+	Name           string    `json:"name"`
+	Desc           string    `json:"desc"`
+	Params         []*Param  `json:"params"`
+	Actions        []*Action `json:"actions"`
+	RouteName      string    `json:"route_name"`
+	AlternateNames []string  `json:"alternate_names"`
 }
 
 // Tool is the interface that all tools must implement.
