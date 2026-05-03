@@ -1,6 +1,14 @@
 package util
 
-import "strconv"
+import (
+	"errors"
+	"strconv"
+)
+
+var (
+	errInvalidInt   = errors.New("invalid integer value")
+	errInvalidFloat = errors.New("invalid floating point value")
+)
 
 // GetStringParam returns the specified parameter if provided or the default
 // if not.
@@ -21,7 +29,7 @@ func GetIntParam(params map[string]string, name string, def int) int {
 	}
 	i, err := strconv.Atoi(v)
 	if err != nil {
-		panic(err)
+		panic(errInvalidInt)
 	}
 	return i
 }
@@ -35,7 +43,7 @@ func GetFloatParam(params map[string]string, name string, def float64) float64 {
 	}
 	f, err := strconv.ParseFloat(v, 64)
 	if err != nil {
-		panic(err)
+		panic(errInvalidFloat)
 	}
 	return f
 }
