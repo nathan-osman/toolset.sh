@@ -9,7 +9,7 @@ var (
 	meta = &registry.Meta{
 		Category:       registry.CategoryNetwork,
 		Name:           "IP Address",
-		Desc:           "return the client IP address",
+		Desc:           "Retrieve your IP address",
 		Params:         []*registry.Param{},
 		RouteName:      "ip-address",
 		AlternateNames: []string{"ip"},

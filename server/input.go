@@ -13,6 +13,8 @@ func convertContextToInput(c *gin.Context, t registry.Tool) *registry.Input {
 			params[p.Name] = v
 		}
 
+		// TODO: overwrite with form / JSON input
+
 		// TODO: verify against Options
 	}
 	return &registry.Input{

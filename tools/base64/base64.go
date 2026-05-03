@@ -19,27 +19,12 @@ var (
 	meta = &registry.Meta{
 		Category: registry.CategoryProgramming,
 		Name:     "Base64",
-		Desc:     "encode / decode base64 data",
+		Desc:     "Encode / decode base64 data",
 		Params: []*registry.Param{
 			{
 				Name:    paramText,
-				Desc:    "text to encode / decode",
+				Desc:    "Text to encode / decode",
 				Default: "",
-			},
-			{
-				Name:    paramAction,
-				Desc:    "action to perform",
-				Default: actionEncode,
-				Options: []*registry.Option{
-					{
-						Name:  actionEncode,
-						Label: "Encode",
-					},
-					{
-						Name:  actionDecode,
-						Label: "Decode",
-					},
-				},
 			},
 		},
 		RouteName: "base64",

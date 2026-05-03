@@ -9,7 +9,7 @@ var (
 	meta = &registry.Meta{
 		Category:       registry.CategoryMath,
 		Name:           "Pi",
-		Desc:           "return the value for Pi",
+		Desc:           "Retrieve an approximation of Pi",
 		Params:         []*registry.Param{},
 		RouteName:      "pi",
 		AlternateNames: []string{},

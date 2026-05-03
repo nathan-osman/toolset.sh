@@ -19,16 +19,16 @@ var (
 	meta = &registry.Meta{
 		Category: registry.CategoryMath,
 		Name:     "Random number",
-		Desc:     "generate a random number",
+		Desc:     "Generate a random number",
 		Params: []*registry.Param{
 			{
 				Name:    paramMin,
-				Desc:    "minimum value, as a floating point number",
+				Desc:    "Minimum value, as a floating point number",
 				Default: "0",
 			},
 			{
 				Name:    paramMax,
-				Desc:    "maximum value, as a floating point number",
+				Desc:    "Maximum value, as a floating point number",
 				Default: "1",
 			},
 		},

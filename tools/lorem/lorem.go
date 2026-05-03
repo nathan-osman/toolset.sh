@@ -17,11 +17,11 @@ var (
 	meta = &registry.Meta{
 		Category: registry.CategoryProgramming,
 		Name:     "Lorem Ipsum",
-		Desc:     "generate random text",
+		Desc:     "Generate random text",
 		Params: []*registry.Param{
 			{
 				Name:    paramNum,
-				Desc:    "number of paragraphs to generate",
+				Desc:    "Number of paragraphs to generate",
 				Default: "1",
 			},
 		},

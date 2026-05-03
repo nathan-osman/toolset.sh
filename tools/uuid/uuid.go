@@ -1,6 +1,8 @@
 package uuid
 
 import (
+	"errors"
+
 	"github.com/gofrs/uuid/v5"
 	"github.com/nathan-osman/toolset.sh/registry"
 	"github.com/nathan-osman/toolset.sh/templates"
@@ -15,14 +17,18 @@ const (
 )
 
 var (
+	errInvalidType = errors.New("invalid type specified")
+)
+
+var (
 	meta = &registry.Meta{
 		Category: registry.CategoryProgramming,
 		Name:     "Generate UUID",
-		Desc:     "generate a UUID (universally unique identifier)",
+		Desc:     "Generate a UUID (universally unique identifier)",
 		Params: []*registry.Param{
 			{
 				Name:    paramType,
-				Desc:    "type of UUID",
+				Desc:    "Type of UUID",
 				Default: typeUuid4,
 				Options: []*registry.Option{
 					{
@@ -85,7 +91,7 @@ func (u *Uuid) Run(i *registry.Input) registry.Output {
 	case typeUuid7:
 		v, err = uuid.NewV7()
 	default:
-		panic("invalid value for parameter 'type'")
+		panic(errInvalidType)
 	}
 	if err != nil {
 		panic(err)

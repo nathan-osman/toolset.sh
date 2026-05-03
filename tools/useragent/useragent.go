@@ -11,7 +11,7 @@ var (
 	meta = &registry.Meta{
 		Category:       registry.CategoryNetwork,
 		Name:           "User Agent",
-		Desc:           "return information about the user agent",
+		Desc:           "Retrieve information about your user agent",
 		Params:         []*registry.Param{},
 		RouteName:      "user-agent",
 		AlternateNames: []string{"ua"},

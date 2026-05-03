@@ -24,16 +24,18 @@ var (
 	meta = &registry.Meta{
 		Category: registry.CategoryDateTime,
 		Name:     "Current Time",
-		Desc:     "return the current date and time",
+		Desc:     "Retrieve the current date and time",
 		Params: []*registry.Param{
 			{
 				Name:    paramFormat,
-				Desc:    "format for date / time",
+				Label:   "Format",
+				Type:    registry.TypeString,
+				Desc:    "Format for date / time",
 				Default: formatDefault,
 				Options: []*registry.Option{
 					{
 						Name:  formatDefault,
-						Label: "default",
+						Label: "Default",
 					},
 					{
 						Name:  formatISO8601,
