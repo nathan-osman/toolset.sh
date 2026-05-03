@@ -1,7 +1,62 @@
-{{ output|safe }}
-<br /><div class="line"></div><br />
-<div class="title">Curl</div>
-<div class="subtitle">Use this tool on the command line:</div>
-<div class="box">
-  <div class="value">curl {{ name }}/{{ meta.RouteName }}</div>
+<div class="columns">
+
+  <!-- Main tool content -->
+  <div class="column is-two-thirds">
+
+    {# Tool meta information #}
+    <h1 class="title">{{ meta.Name }}</h1>
+    <h2 class="subtitle">{{ meta.Desc }}</h2>
+
+    <br>
+
+    {{ output|safe }}
+
+    <br>
+
+    {# If there are form inputs, show them here #}
+    {% if meta.Params %}
+      <h2 class="title is-4">Parameters</h2>
+      <form>
+        {% for param in meta.Params %}
+          <div class="field">
+            <label class="label">{{ param.Label }}</label>
+            <div class="control">
+              {% if param.Options %}
+                <div class="select">
+                  <select name="{{ param.Name }}">
+                    {% for option in param.Options %}
+                      <option value="{{ option.Name }}">{{ option.Label }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              {% else %}
+                <input class="input" type="text" name="{{ param.Name }}">
+              {% endif %}
+              <p class="help">{{ param.Desc }}</p>
+            </div>
+          </div>
+        {% endfor %}
+        <div class="control">
+          <button class="button">Submit</button>
+        </div>
+      </form>
+    {% endif %}
+  </div>
+
+  <div class="column">
+    <nav class="panel">
+      <p class="panel-heading">Command Line</p>
+      <div class="panel-block">
+        <div class="content is-flex-grow-1">
+          <p>
+            Want to use this tool in a terminal?
+          </p>
+          <p class="has-text-weight-bold">cURL</p>
+          <pre>curl {{ name }}/{{ meta.RouteName }}</pre>
+          <p class="has-text-weight-bold">wget</p>
+          <pre>wget -qO- http://{{ name }}/{{ meta.RouteName }}</pre>
+        </div>
+      </div>
+    </nav>
+  </div>
 </div>

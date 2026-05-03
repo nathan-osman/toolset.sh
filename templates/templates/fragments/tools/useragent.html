@@ -1,15 +1,54 @@
 {% extends "templates/fragments/tools/single.html" %}
 
 {% block extra %}
-<br />
-<div class="properties">
-  <div class="name">Browser:</div>
-  <div>{{ response.Browser }}</div>
-  <div class="name">Version:</div>
-  <div>{{ response.Version }}</div>
-  <div class="name">Operating system:</div>
-  <div>{{ response.OS }}</div>
-  <div class="name">Operating system version:</div>
-  <div>{{ response.OSVersion }}</div>
-</div>
+<table class="table is-striped">
+  <tbody>
+    <tr>
+      <th>Browser:</th>
+      <td>
+        {{ response.Browser }}
+        {% if response.Browser == "Chrome" %}
+          <span class="icon-text">
+            <span class="icon">
+              <i class="fa-brands fa-chrome"></i>
+            </span>
+          </span>
+        {% elif response.Browser == "Edge" %}
+          <span class="icon-text">
+            <span class="icon">
+              <i class="fa-brands fa-edge"></i>
+            </span>
+          </span>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <th>Version:</th>
+      <td>{{ response.Version }}</td>
+    </tr>
+    <tr>
+      <th>Operating system:</th>
+      <td>
+        {{ response.OS }}
+        {% if response.OS == "Windows" %}
+          <span class="icon-text">
+            <span class="icon">
+              <i class="fa-brands fa-windows"></i>
+            </span>
+          </span>
+        {% elif response.OS == "Linux" %}
+          <span class="icon-text">
+            <span class="icon">
+              <i class="fa-brands fa-linux"></i>
+            </span>
+          </span>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <th>Operating system version:</th>
+      <td>{{ response.OSVersion }}</td>
+    </tr>
+  </tbody>
+</table>
 {% endblock %}

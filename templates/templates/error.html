@@ -1,8 +1,14 @@
-<div class="error">
-  <div class="title">Oh no!</div>
-  <p>
-    Something went wrong while trying to complete your request:
-  </p>
-  <pre>{{ msg }}</pre>
-  <p>Please adjust your input and try again.</p>
+<h1 class="title has-text-danger">Oh no!</h1>
+<h2 class="subtitle has-text-danger">
+  Something went wrong while trying to complete your request
+</h2>
+
+<div class="block">
+  <p>Here's more detailed information about what happened:</p>
 </div>
+
+<div class="block">
+  <pre><strong>Error:</strong> {{ msg }}</pre>
+</div>
+
+<br><br>

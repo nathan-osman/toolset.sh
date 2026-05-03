@@ -1,16 +1,19 @@
 {% extends "templates/fragments/tools/single.html" %}
 
 {% block extra %}
-<br />
-<p>
-  Need to force IPv4 or IPv6? Prefix your request with our handy subdomains:
-</p>
-<p>
-  <a href="//ipv4.{{name}}/ip-address">
-    <strong>ipv4</strong>.{{ name }}/ip-address
-  </a><br />
-  <a href="//ipv6.{{name}}/ip-address">
-    <strong>ipv6</strong>.{{ name }}/ip-address
-  </a>
-</p>
+<div class="block">
+  <p>
+    Need to force IPv4 or IPv6? Prefix your request with our handy subdomains:
+  </p>
+</div>
+<div class="block">
+  <p>
+    <a href="//ipv4.{{name}}/ip-address">
+      <strong>ipv4</strong>.{{ name }}/ip-address
+    </a><br />
+    <a href="//ipv6.{{name}}/ip-address">
+      <strong>ipv6</strong>.{{ name }}/ip-address
+    </a>
+  </p>
+</div>
 {% endblock %}
